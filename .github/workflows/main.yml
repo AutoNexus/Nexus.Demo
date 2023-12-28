@@ -26,4 +26,4 @@ jobs:
       run: dotnet build
 
     - name: 'Test project'
-      run: dotnet test --environment ${{vars.BROWSERNAME}}
+      run: dotnet test --environment browserName="Edge"
