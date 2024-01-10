@@ -1,15 +1,39 @@
-﻿using Framework.Configurations;
+﻿using Framework.Browsers;
+using Framework.Configurations;
 using Framework.Utilities;
 using Humanizer;
 using Nexus.Core.Logging;
 using Nexus.Selenium.Browsers;
+using Nexus.TestProject.Steps;
 using NUnit.Allure.Attributes;
 using NUnit.Framework.Interfaces;
 
 namespace Nexus.TestProject.Tests
 {
-    public abstract class BaseWebTest : BaseTest
+    public abstract class BaseWebTest
     {
+        protected static string ScenarioName
+                                    => TestContext.CurrentContext.Test.Properties.Get("Description")?.ToString()
+                                       ?? TestContext.CurrentContext.Test.Name.Replace("_", string.Empty).Humanize();
+
+        private static Logger Logger => Logger.Instance;
+        private static TestContext.ResultAdapter Result => TestContext.CurrentContext.Result;
+        private readonly ScreenshotProvider screenshotProvider = new ScreenshotProvider();
+
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            Logger.Info("Setup startup config");
+            NexusServices.SetStartup(new CustomStartup());
+        }
+
+        [SetUp]
+        public void Setup()
+        {
+            Logger.Info($"Start scenario [{ScenarioName}]");
+            GoToPageStartPage();
+            SetScreenExpansionMaximize();
+        }
 
         [TearDown]
         public void CleanUp()
@@ -32,15 +56,6 @@ namespace Nexus.TestProject.Tests
         {
             NexusServices.Browser.GoTo(Configuration.StartUrl);
         }
-
-        protected static string ScenarioName
-=> TestContext.CurrentContext.Test.Properties.Get("Description")?.ToString()
-?? TestContext.CurrentContext.Test.Name.Replace("_", string.Empty).Humanize();
-
-        private static Logger Logger => Logger.Instance;
-
-        private static TestContext.ResultAdapter Result => TestContext.CurrentContext.Result;
-        private readonly ScreenshotProvider screenshotProvider = new ScreenshotProvider();
 
         private void LogScenarioResult()
         {

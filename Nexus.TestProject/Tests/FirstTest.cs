@@ -7,52 +7,112 @@ namespace Nexus.TestProject.Tests
 {
     [AllureNUnit]
     [AllureSuite("Demo Tests")]
-    [TestFixture]
+    //[TestFixture]
     public class FirstTest : BaseWebTest
     {
         private readonly LoginPageSteps loginPageSteps = new LoginPageSteps();
         private readonly HomePageSteps homePageSteps = new HomePageSteps();
         private readonly PimPageSteps pimPageSteps = new PimPageSteps();
 
-        [SetUp]
-        public void Setup()
+        public void Login()
         {
-            GoToPageStartPage();
-            SetScreenExpansionMaximize();
             loginPageSteps.Login("Admin", "admin123");
         }
 
+        [Retry(2)]
         [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
         public void DeleteEmployeeForSpecificStatus()
         {
+            Login();
             homePageSteps.NavigateToPIMPage();
             pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
         }
 
-        [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
-        public void DeleteEmployeeForSpecificStatus1()
-        {
-            homePageSteps.NavigateToPIMPage();
-            pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
-        }
-
-        [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
-        public void DeleteEmployeeForSpecificStatus2()
-        {
-            homePageSteps.NavigateToPIMPage();
-            pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
-        }
-
-        [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
-        public void DeleteEmployeeForSpecificStatus3()
-        {
-            homePageSteps.NavigateToPIMPage();
-            pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
-        }
-
+        [Retry(2)]
         [Test(Description = "Add new Employee uner PIM Menu")]
         public void AddNewEmployee()
         {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.AddNewEmployee("Jhon", "Walter", "White");
+            pimPageSteps.NavigateToEmployeeListPage();
+            pimPageSteps.VerifyEmployeeAdded("Jhon");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
+        public void DeleteEmployeeForSpecificStatus_Copy1()
+        {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Add new Employee uner PIM Menu")]
+        public void AddNewEmployee_Copy1()
+        {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.AddNewEmployee("Jhon", "Walter", "White");
+            pimPageSteps.NavigateToEmployeeListPage();
+            pimPageSteps.VerifyEmployeeAdded("Jhon");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
+        public void DeleteEmployeeForSpecificStatus_Copy2()
+        {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Add new Employee uner PIM Menu")]
+        public void AddNewEmployee_Copy2()
+        {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.AddNewEmployee("Jhon", "Walter", "White");
+            pimPageSteps.NavigateToEmployeeListPage();
+            pimPageSteps.VerifyEmployeeAdded("Jhon");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
+        public void DeleteEmployeeForSpecificStatus_Copy3()
+        {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Add new Employee uner PIM Menu")]
+        public void AddNewEmployee_Copy3()
+        {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.AddNewEmployee("Jhon", "Walter", "White");
+            pimPageSteps.NavigateToEmployeeListPage();
+            pimPageSteps.VerifyEmployeeAdded("Jhon");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Delete Specific Employment Status Employees under PIM menu")]
+        public void DeleteEmployeeForSpecificStatus_Copy4()
+        {
+            Login();
+            homePageSteps.NavigateToPIMPage();
+            pimPageSteps.SelectSpecificEmployees("Full-Time Permanent");
+        }
+
+        [Retry(2)]
+        [Test(Description = "Add new Employee uner PIM Menu")]
+        public void AddNewEmployee_Copy4()
+        {
+            Login();
             homePageSteps.NavigateToPIMPage();
             pimPageSteps.AddNewEmployee("Jhon", "Walter", "White");
             pimPageSteps.NavigateToEmployeeListPage();

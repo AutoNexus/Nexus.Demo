@@ -7,8 +7,8 @@ namespace Nexus.TestProject.Tests
 {
     [AllureNUnit]
     [AllureSuite("Demo Tests")]
-    //[TestFixture]
-    public class SecondTest : BaseWebTest
+   // [TestFixture]
+    public class FourthTest : BaseWebTest
     {
         private readonly LoginPageSteps loginPageSteps = new LoginPageSteps();
         private readonly HomePageSteps homePageSteps = new HomePageSteps();
